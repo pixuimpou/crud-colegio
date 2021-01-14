@@ -1,4 +1,8 @@
-div{
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn{
     padding: 2px 6px;
     border: 1px solid rgb(118, 118, 118);
     border-radius: 2.5px;
@@ -9,7 +13,78 @@ div{
     cursor: default;
 }
 
-div:hover{
+.btn:hover{
     background-color: rgb(225, 225, 225);
     border-color: rgb(75, 75, 75) ;
+}
+
+.cards-container{
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    background-color: #eeeeee;
+    max-width: 450px;
+    margin-bottom: 25px;
+}
+
+.card-img{
+    background-image: url(./image/HJ8wJPo.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 400px;
+    margin-bottom: 30px;
+}
+
+.card-title{
+    text-align: center;
+    font-size: 23px;
+    margin: 0 auto;
+    color: #2b2b2b;
+    display: block;
+    padding-bottom: 30px;
+    width: 80%;
+    border-bottom: 2px solid #c7c7c7;
+}
+
+.card-content{
+    text-align: center;
+    padding: 30px;
+    margin: 0;
+    font-size: 15px;
+    color: #2b2b2b;
+}
+
+.table-container{
+    display: flex;
+    flex-direction: column;
+    min-width: 600px;
+    margin: auto;
+}
+
+.table-row{
+    justify-content: space-around;
+    display: flex;
+}
+
+.table-cell{
+    flex: 1;
+    min-height: 40px;
+    min-width: 20px;
+    background-color: #c7c7c7;
+    line-height: 40px;
+    padding: 0 20px;
+    border: 1px solid #2b2b2b;
+}
+
+.scroll{
+    width: 100%;
+    overflow: auto;
 }
