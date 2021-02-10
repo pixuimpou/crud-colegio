@@ -76,41 +76,95 @@ let respostas = [
 
 ];
 
-const Fazergabarito = () => {
+
+const fazerGabaritoFilter = () => {
     let gabarito = [];
 
-    respostas.forEach(resposta => {
-        let idResposta = resposta.idPergunta;
-        let verificadorPergunta = false;
-        let verificadorOpcao = false;
-        perguntas.forEach(pergunta => {
-            let labelOpcao;
-            let respostaDaPergunta = pergunta.id === idResposta;
-            
-
-            if(respostaDaPergunta) {
-                
-                verificadorPergunta = true;
-                pergunta.opcoes.forEach(opcao => {
-                    let opcaoCerta = resposta.idOpcao === opcao.id;
-
-                    if(opcaoCerta) {
-                        verificadorOpcao = true;
-                        labelOpcao = opcao.label;
-                        gabarito.push({ id: idResposta, label: pergunta.label, resposta: labelOpcao, idOpcao: resposta.idOpcao })
-                    }
-                })     
-            }
-            
+    perguntas.forEach(pergunta => {
+        let pareamento = respostas.filter((resposta) => {
+            return pergunta.id === resposta.idPergunta;
         })
-        if (verificadorOpcao === false) {
-            console.log("A pergunta com id:", idResposta, "não possui opção com id:", resposta.idOpcao);
+
+        pareamento = pareamento[0];
+
+        if(pareamento){
+            let labelOpcao = pergunta.opcoes.filter((opcao) => {
+                return pareamento.idOpcao === opcao.id;
+            })
+            labelOpcao = labelOpcao[0].label;
+
+            if(labelOpcao){
+                gabarito = [...gabarito, { id: pareamento.idPergunta, label: pergunta.label, 
+                    idOpcao: pareamento.idOpcao, labelOpcao}];
+
+            } else { 
+                console.log(`erro, opcao da pergunta ${pergunta.id} não encontrada`);
+            }           
+
+        } else {
+            console.log(`erro, resposta da pergunta ${pergunta.id} não encontrada`);
         }
-        if(verificadorPergunta === false){
-            console.log("A pergunta com id:",idResposta,"não existe")
-        }
-    });
+        
+    })
+
     console.log(gabarito);
 }
 
-Fazergabarito()
+fazerGabaritoFilter()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const fazerGabarito = () => {
+//     let gabarito = [];
+
+//     respostas.forEach(resposta => {
+//         let idResposta = resposta.idPergunta;
+//         let verificadorPergunta = false;
+//         let verificadorOpcao = false;
+//         perguntas.forEach(pergunta => {
+//             let labelOpcao;
+//             let respostaDaPergunta = (pergunta.id === idResposta);
+            
+
+//             if(respostaDaPergunta) {
+                
+//                 verificadorPergunta = true;
+//                 pergunta.opcoes.forEach(opcao => {
+//                     let opcaoCerta = (resposta.idOpcao === opcao.id);
+
+//                     if(opcaoCerta) {
+//                         verificadorOpcao = true;
+//                         labelOpcao = opcao.label;
+//                         gabarito = [...gabarito, { id: idResposta, label: pergunta.label, resposta: labelOpcao, idOpcao: resposta.idOpcao }];
+//                     }
+//                 })     
+//             }
+            
+//         })
+
+//         if(verificadorPergunta) {
+//             if (verificadorOpcao === false) {
+//                 console.log(`A pergunta com id: ${idResposta} não possui opção com id: ${resposta.idOpcao}`);
+//             }
+//         } else {
+//             console.log(`A pergunta com id: ${idResposta} não existe`);
+//         }
+        
+    
+//     });
+//     console.log(gabarito);
+// }
+
+// fazerGabarito()
